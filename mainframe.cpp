@@ -1,6 +1,19 @@
 #include "wx/config.h"
+#include "wx/dnd.h"
 #include "mainframe.h"
 #include "wxmain.h"
+
+
+class MyDropTarget
+	: public wxFileDropTarget
+{
+	public:
+		virtual bool OnDropFiles (wxCoord x, wxCoord y, const wxArrayString &filenames)
+		{
+			wxGetApp().SetFilenames(filenames);
+			return true;
+		}
+};
 
 
 MainFrame::MainFrame( wxWindow* parent )
@@ -53,6 +66,7 @@ MainFrameBase( parent )
 	m_canvas->m_grid.m_w = gw;
 	m_canvas->m_grid.m_h = gh;
 
+	SetDropTarget(new MyDropTarget);
 
 }
 
