@@ -14,7 +14,7 @@ C_OBJECTS_BARE=
 LIBS=
 
 #either define a progname, or a libname.
-PROGNAME=prog
+PROGNAME=scanknipper
 #LIBNAME=
 #LIBNAME_BARE=
 
