@@ -1,5 +1,6 @@
 #include "wx/wx.h"
 #include "wx/filename.h"
+#include "wx/cmdline.h"
 #include "wxmain.h"
 
 BEGIN_EVENT_TABLE(App, wxApp)
@@ -24,6 +25,15 @@ bool App::OnInit()
 
 	m_mainFrame->Show();
 
+	if (argc > 1)
+	{
+		wxArrayString files;
+		for (int i = 1; i < argc; i++)
+		{
+			files.Add(argv[i]);
+		}
+		SetFilenames(files);
+	}
 
 	return true;
 }
@@ -125,3 +135,17 @@ void App::SaveSlices(Grid *grid)
 }
 
 char const *App::s_fileTypes[] = { "jpg", "png" };
+
+
+static const wxCmdLineEntryDesc cmdLineDesc[] =
+{
+{ wxCMD_LINE_PARAM, NULL, NULL, "input file", wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_MULTIPLE },
+{ wxCMD_LINE_NONE }
+};
+
+void App::OnInitCmdLine(wxCmdLineParser &parser)
+{
+	// suppress wx's default cmdline options so it won't complain about unkown options if we pass files on the cmdline
+	parser.SetDesc(cmdLineDesc);
+}
+

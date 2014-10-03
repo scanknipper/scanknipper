@@ -25,6 +25,7 @@ class App: public wxApp
 		void PrevImage();
 		void SetFileType(int fileType) { m_fileType = fileType; }
 
+		void OnInitCmdLine(wxCmdLineParser &parser);
 
 	private:
 		wxArrayString m_fileNames;
