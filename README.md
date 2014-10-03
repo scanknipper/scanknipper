@@ -7,3 +7,6 @@ This utility was written to cut scans of samples on a grid into columns. Though 
 
 dependencies:
 wxWidgets 3.0
+
+wxFormBuilder if you want to edit the interface definition (.fbp)
+
