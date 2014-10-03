@@ -126,6 +126,7 @@ void App::SaveSlices(Grid *grid)
 
 			wxImage img = m_image.GetSubImage(wxRect(xx,yy,ww,hh));
 
+			img.SetOption("quality", 95);
 
 			fn.SetName(rowName);
 
