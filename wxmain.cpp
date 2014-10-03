@@ -1,6 +1,7 @@
 #include "wx/wx.h"
 #include "wx/filename.h"
 #include "wx/cmdline.h"
+#include "wx/config.h"
 #include "wxmain.h"
 
 BEGIN_EVENT_TABLE(App, wxApp)
@@ -68,6 +69,21 @@ void App::NextImage()
 	m_mainFrame->SetIsLastImage(m_currentFile  >= (int)(m_fileNames.GetCount()) - 1);
 	m_mainFrame->SetIsFirstImage(!(m_currentFile > 0));
 
+	wxConfigBase *conf = wxConfig::Get();
+
+	double gx = conf->ReadDouble(wxT("GridX"), 0.0);
+	double gy = conf->ReadDouble(wxT("GridY"), 0.0);
+	double gw = conf->ReadDouble(wxT("GridW"), m_image.GetWidth());
+	double gh = conf->ReadDouble(wxT("GridH"), m_image.GetHeight());
+
+	Grid &g = m_mainFrame->m_canvas->m_grid;
+	g.m_x = gx / m_image.GetWidth();
+	g.m_y = gy / m_image.GetHeight();
+	g.m_w = gw / m_image.GetWidth();
+	g.m_h = gh / m_image.GetHeight();
+
+
+	g.MakeInside();
 }
 
 

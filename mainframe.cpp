@@ -152,47 +152,7 @@ void MainFrame::OnMotion( wxMouseEvent& event )
 
 	if (m_dragGrid != DRAG_NONE)
 	{
-
-		if (g.m_x < 0.0)
-		{
-			g.m_x = 0.0;
-		}
-
-		if (g.m_y < 0.0)
-		{
-			g.m_y = 0.0;
-		}
-
-		if (g.m_x > .9)
-		{
-			g.m_x = .9;
-		}
-
-		if (g.m_y > .9)
-		{
-			g.m_y = .9;
-		}
-
-		if (g.m_x + g.m_w > 1.0)
-		{
-			g.m_w = 1.0 - g.m_x;
-		}
-
-		if (g.m_y + g.m_h > 1.0)
-		{
-			g.m_w = 1.0 - g.m_y;
-		}
-
-		if (g.m_w < .05)
-		{
-			g.m_w = .05;
-		}
-
-		if (g.m_h < .05)
-		{
-			g.m_h = .05;
-		}
-
+		g.MakeInside();
 		m_canvas->Render(true);
 		m_canvas->Refresh();
 	}
@@ -248,10 +208,10 @@ void MainFrame::OnSaveAndNext( wxCommandEvent& event )
 {
 	wxConfigBase *conf = wxConfig::Get();
 
-	conf->Write(wxT("GridX"), m_canvas->m_grid.m_x);
-	conf->Write(wxT("GridY"), m_canvas->m_grid.m_y);
-	conf->Write(wxT("GridW"), m_canvas->m_grid.m_w);
-	conf->Write(wxT("GridH"), m_canvas->m_grid.m_h);
+	conf->Write(wxT("GridX"), m_canvas->m_grid.m_x * m_canvas->m_bitmap.GetWidth());
+	conf->Write(wxT("GridY"), m_canvas->m_grid.m_y * m_canvas->m_bitmap.GetHeight());
+	conf->Write(wxT("GridW"), m_canvas->m_grid.m_w * m_canvas->m_bitmap.GetWidth());
+	conf->Write(wxT("GridH"), m_canvas->m_grid.m_h * m_canvas->m_bitmap.GetHeight());
 
 
 	wxGetApp().SaveSlices(&(m_canvas->m_grid));
@@ -260,6 +220,13 @@ void MainFrame::OnSaveAndNext( wxCommandEvent& event )
 
 void MainFrame::OnSkipAndNext( wxCommandEvent& event )
 {
+	wxConfigBase *conf = wxConfig::Get();
+
+	conf->Write(wxT("GridX"), m_canvas->m_grid.m_x * m_canvas->m_bitmap.GetWidth());
+	conf->Write(wxT("GridY"), m_canvas->m_grid.m_y * m_canvas->m_bitmap.GetHeight());
+	conf->Write(wxT("GridW"), m_canvas->m_grid.m_w * m_canvas->m_bitmap.GetWidth());
+	conf->Write(wxT("GridH"), m_canvas->m_grid.m_h * m_canvas->m_bitmap.GetHeight());
+
 	wxGetApp().NextImage();
 }
 

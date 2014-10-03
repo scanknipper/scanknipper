@@ -19,6 +19,7 @@ class ImageCanvas
 
 		virtual void Render(bool force = false);
 		Grid m_grid;
+		wxBitmap m_bitmap;
 
 		void WindowToGrid(int x, int y, double *xx, double *yy);
 
@@ -26,7 +27,6 @@ class ImageCanvas
 
 	private:
 
-		wxBitmap m_bitmap;
 
 		double m_zoom;
 		double m_offX;
