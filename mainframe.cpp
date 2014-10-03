@@ -123,67 +123,76 @@ void MainFrame::OnMotion( wxMouseEvent& event )
 
 	m_canvas->WindowToGrid(event.GetX(), event.GetY(),&x,&y);
 
+	Grid &g = m_canvas->m_grid;
+
 	if (m_dragGrid == DRAG_TOPLEFT)
 	{
-		double oldx = m_canvas->m_grid.m_x;
-		double oldy = m_canvas->m_grid.m_y;
-		m_canvas->m_grid.m_x = x;
-		m_canvas->m_grid.m_y = y;
+		g.m_x = x;
+		g.m_y = y;
 
-		if (m_canvas->m_grid.m_x < 0.0)
-		{
-			m_canvas->m_grid.m_x = 0.0;
-		}
-
-		if (m_canvas->m_grid.m_y < 0.0)
-		{
-			m_canvas->m_grid.m_y = 0.0;
-		}
-
-		if (m_canvas->m_grid.m_y > .9)
-		{
-			m_canvas->m_grid.m_x = .0;
-		}
-
-		if (m_canvas->m_grid.m_y > .9)
-		{
-			m_canvas->m_grid.m_y = .9;
-		}
-
-		m_canvas->m_grid.m_w += oldx;
-		m_canvas->m_grid.m_w -= m_canvas->m_grid.m_x;
-		m_canvas->m_grid.m_h += oldy;
-		m_canvas->m_grid.m_h -= m_canvas->m_grid.m_y;
 	}
+
+	if (m_dragGrid == DRAG_TOPRIGHT)
+	{
+		g.m_w = x - g.m_x;
+		g.m_y = y;
+	}
+
 	if (m_dragGrid == DRAG_BOTTOMRIGHT)
 	{
-		m_canvas->m_grid.m_w = x - m_canvas->m_grid.m_x;
-		m_canvas->m_grid.m_h = y - m_canvas->m_grid.m_y;
+		g.m_w = x - g.m_x;
+		g.m_h = y - g.m_y;
+	}
 
-		if (m_canvas->m_grid.m_w < .1)
-		{
-			m_canvas->m_grid.m_w = .1;
-		}
-
-		if (m_canvas->m_grid.m_h < .1)
-		{
-			m_canvas->m_grid.m_h = .1;
-		}
-
-		if (m_canvas->m_grid.m_w > 1.01)
-		{
-			m_canvas->m_grid.m_w = 1.0;
-		}
-
-		if (m_canvas->m_grid.m_h > 1.0)
-		{
-			m_canvas->m_grid.m_h = 1.0;
-		}
-
+	if (m_dragGrid == DRAG_BOTTOMLEFT)
+	{
+		g.m_x = x;
+		g.m_h = y - g.m_y;
 	}
 
 	if (m_dragGrid != DRAG_NONE)
 	{
+
+		if (g.m_x < 0.0)
+		{
+			g.m_x = 0.0;
+		}
+
+		if (g.m_y < 0.0)
+		{
+			g.m_y = 0.0;
+		}
+
+		if (g.m_x > .9)
+		{
+			g.m_x = .9;
+		}
+
+		if (g.m_y > .9)
+		{
+			g.m_y = .9;
+		}
+
+		if (g.m_x + g.m_w > 1.0)
+		{
+			g.m_w = 1.0 - g.m_x;
+		}
+
+		if (g.m_y + g.m_h > 1.0)
+		{
+			g.m_w = 1.0 - g.m_y;
+		}
+
+		if (g.m_w < .05)
+		{
+			g.m_w = .05;
+		}
+
+		if (g.m_h < .05)
+		{
+			g.m_h = .05;
+		}
+
 		m_canvas->Render(true);
 		m_canvas->Refresh();
 	}
@@ -192,10 +201,35 @@ void MainFrame::OnMotion( wxMouseEvent& event )
 
 MainFrame::GRIDDRAG MainFrame::SelectClosest(Grid const &g, double x, double y)
 {
-	double dist = (g.m_x - x ) * (g.m_x - x) + (g.m_y - y ) * (g.m_y - y);
-	double dist2 = (g.m_x + g.m_w - x ) * (g.m_x + g.m_w - x) + (g.m_y + g.m_h - y ) * (g.m_y + g.m_h - y);
+	double distXLeft = fabs(g.m_x - x);
+	double distYTop = fabs(g.m_y -y);
+	double distXRight = fabs(g.m_x + g.m_w - x);
+	double distYBottom = fabs(g.m_y + g.m_h - y);
 
-	return dist < dist2 ? DRAG_TOPLEFT : DRAG_BOTTOMRIGHT;
+	if (distXLeft < distXRight)
+	{
+		if (distYTop < distYBottom)
+		{
+			return DRAG_TOPLEFT;
+		}
+		else
+		{
+			return DRAG_BOTTOMLEFT;
+		}
+	}
+	else
+	{
+		if (distYTop < distYBottom)
+		{
+			return DRAG_TOPRIGHT;
+		}
+		else
+		{
+			return DRAG_BOTTOMRIGHT;
+		}
+	}
+
+	return DRAG_NONE;
 }
 
 
