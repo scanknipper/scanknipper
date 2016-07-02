@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Jan 29 2014)
+// C++ code generated with wxFormBuilder (version Jun 17 2015)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -27,7 +27,7 @@ MainFrameBase::MainFrameBase( wxWindow* parent, wxWindowID id, const wxString& t
 	m_close = new wxMenuItem( m_fileMenu, wxID_CLOSE, wxString( wxT("Close") ) , wxEmptyString, wxITEM_NORMAL );
 	m_fileMenu->Append( m_close );
 	
-	m_menubar1->Append( m_fileMenu, wxT("File") );
+	m_menubar1->Append( m_fileMenu, wxT("File") ); 
 	
 	this->SetMenuBar( m_menubar1 );
 	
@@ -81,12 +81,15 @@ MainFrameBase::MainFrameBase( wxWindow* parent, wxWindowID id, const wxString& t
 	m_saveFormatChoice->SetSelection( 0 );
 	gSizer1->Add( m_saveFormatChoice, 0, wxALL|wxEXPAND, 5 );
 	
+	
 	bSizer2->Add( gSizer1, 0, wxEXPAND, 5 );
+	
 	
 	bSizer1->Add( bSizer2, 0, wxEXPAND, 5 );
 	
 	m_canvas = new ImageCanvas(this);
 	bSizer1->Add( m_canvas, 1, wxALL|wxEXPAND, 5 );
+	
 	
 	this->SetSizer( bSizer1 );
 	this->Layout();
@@ -109,9 +112,9 @@ MainFrameBase::MainFrameBase( wxWindow* parent, wxWindowID id, const wxString& t
 MainFrameBase::~MainFrameBase()
 {
 	// Disconnect Events
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFrameBase::OnOpenFile ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFrameBase::OnSave ) );
-	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFrameBase::OnClose ) );
+	this->Disconnect( wxID_OPEN, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFrameBase::OnOpenFile ) );
+	this->Disconnect( wxID_SAVE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFrameBase::OnSave ) );
+	this->Disconnect( wxID_CLOSE, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFrameBase::OnClose ) );
 	m_saveAndNextButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrameBase::OnSaveAndNext ), NULL, this );
 	m_skipAndNextButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrameBase::OnSkipAndNext ), NULL, this );
 	m_prevImage->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrameBase::OnPrevious ), NULL, this );
@@ -121,4 +124,5 @@ MainFrameBase::~MainFrameBase()
 	m_canvas->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( MainFrameBase::OnLeftDown ), NULL, this );
 	m_canvas->Disconnect( wxEVT_LEFT_UP, wxMouseEventHandler( MainFrameBase::OnLeftUp ), NULL, this );
 	m_canvas->Disconnect( wxEVT_MOTION, wxMouseEventHandler( MainFrameBase::OnMotion ), NULL, this );
+	
 }

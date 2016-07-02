@@ -1,13 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Jan 29 2014)
+// C++ code generated with wxFormBuilder (version Jun 17 2015)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
 
-#ifndef __guibase__
-#define __guibase__
+#ifndef __GUIBASE_H__
+#define __GUIBASE_H__
 
+#include <wx/artprov.h>
+#include <wx/xrc/xmlres.h>
 #include <wx/string.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
@@ -43,7 +45,6 @@ class MainFrameBase : public wxFrame
 		wxButton* m_skipAndNextButton;
 		wxStaticLine* m_staticline1;
 		wxButton* m_prevImage;
-		
 		wxStaticText* m_staticText31;
 		wxSpinCtrl* m_rowsSpinCtrl;
 		wxStaticText* m_staticText2;
@@ -69,9 +70,10 @@ class MainFrameBase : public wxFrame
 	public:
 		ImageCanvas *m_canvas;
 		
-		MainFrameBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("ScanKnipper"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 606,461 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		MainFrameBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("ScanKnipper"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 606,461 ), long style = wxDEFAULT_FRAME_STYLE|wxMAXIMIZE|wxTAB_TRAVERSAL );
+		
 		~MainFrameBase();
 	
 };
 
-#endif //__guibase__
+#endif //__GUIBASE_H__
