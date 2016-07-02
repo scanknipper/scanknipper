@@ -113,7 +113,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="&quot;C:\wxWidgets-3.1.0\include\msvc&quot;;&quot;C:\wxWidgets-3.1.0\include&quot;"
-				PreprocessorDefinitions="UNICODE"
+				PreprocessorDefinitions="_UNICODE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				WarningLevel="3"
