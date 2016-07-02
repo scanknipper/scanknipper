@@ -81,7 +81,7 @@ void MainFrame::OnOpenFile( wxCommandEvent& event )
 
 	wxArrayString files;
 
-	openDialog.GetFilenames(files);
+	openDialog.GetPaths(files);
 
 	wxGetApp().SetFilenames(files);
 
