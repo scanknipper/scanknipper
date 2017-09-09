@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Jun 17 2015)
+// C++ code generated with wxFormBuilder (version Dec 21 2016)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -23,8 +23,9 @@
 #include <wx/statline.h>
 #include <wx/stattext.h>
 #include <wx/spinctrl.h>
-#include <wx/choice.h>
 #include <wx/sizer.h>
+#include <wx/choice.h>
+#include "wx/editlbox.h"
 #include "canvas.h"
 #include <wx/frame.h>
 
@@ -45,10 +46,16 @@ class MainFrameBase : public wxFrame
 		wxButton* m_skipAndNextButton;
 		wxStaticLine* m_staticline1;
 		wxButton* m_prevImage;
-		wxStaticText* m_staticText31;
-		wxSpinCtrl* m_rowsSpinCtrl;
 		wxStaticText* m_staticText2;
 		wxSpinCtrl* m_columnsSpinCtrl;
+		wxStaticText* m_staticText31;
+		wxSpinCtrl* m_rowsSpinCtrl;
+		wxStaticText* m_staticText4;
+		wxStaticText* m_staticText5;
+		wxChoice* m_choice2;
+		wxChoice* m_choice4;
+		wxEditableListBox *m_columnNames;
+		wxEditableListBox *m_rowNames;
 		wxStaticText* m_staticText3;
 		wxChoice* m_saveFormatChoice;
 		
@@ -59,8 +66,8 @@ class MainFrameBase : public wxFrame
 		virtual void OnSaveAndNext( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSkipAndNext( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnPrevious( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnRows( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnColumns( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnRows( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnFileType( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnLeftDown( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnLeftUp( wxMouseEvent& event ) { event.Skip(); }
@@ -70,7 +77,7 @@ class MainFrameBase : public wxFrame
 	public:
 		ImageCanvas *m_canvas;
 		
-		MainFrameBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("ScanKnipper"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 606,461 ), long style = wxDEFAULT_FRAME_STYLE|wxMAXIMIZE|wxTAB_TRAVERSAL );
+		MainFrameBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("ScanKnipper"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_FRAME_STYLE|wxMAXIMIZE|wxTAB_TRAVERSAL );
 		
 		~MainFrameBase();
 	

@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Jun 17 2015)
+// C++ code generated with wxFormBuilder (version Dec 21 2016)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -11,7 +11,7 @@
 
 MainFrameBase::MainFrameBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetSizeHints( wxSize( 630,-1 ), wxDefaultSize );
 	
 	m_menubar1 = new wxMenuBar( 0 );
 	m_fileMenu = new wxMenu();
@@ -54,22 +54,78 @@ MainFrameBase::MainFrameBase( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	bSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
 	
-	wxGridSizer* gSizer1;
-	gSizer1 = new wxGridSizer( 3, 2, 0, 0 );
+	wxFlexGridSizer* fgSizer2;
+	fgSizer2 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer2->AddGrowableRow( 2 );
+	fgSizer2->SetFlexibleDirection( wxBOTH );
+	fgSizer2->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_staticText31 = new wxStaticText( this, wxID_ANY, wxT("Rows"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText31->Wrap( -1 );
-	gSizer1->Add( m_staticText31, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
-	
-	m_rowsSpinCtrl = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 26, 1 );
-	gSizer1->Add( m_rowsSpinCtrl, 0, wxALL|wxEXPAND, 5 );
+	wxBoxSizer* bSizer3;
+	bSizer3 = new wxBoxSizer( wxHORIZONTAL );
 	
 	m_staticText2 = new wxStaticText( this, wxID_ANY, wxT("Columns"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText2->Wrap( -1 );
-	gSizer1->Add( m_staticText2, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT|wxALL, 5 );
+	bSizer3->Add( m_staticText2, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
 	
 	m_columnsSpinCtrl = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 26, 8 );
-	gSizer1->Add( m_columnsSpinCtrl, 0, wxALL|wxEXPAND, 5 );
+	bSizer3->Add( m_columnsSpinCtrl, 0, wxALL|wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( bSizer3, 1, wxEXPAND, 5 );
+	
+	wxBoxSizer* bSizer5;
+	bSizer5 = new wxBoxSizer( wxHORIZONTAL );
+	
+	m_staticText31 = new wxStaticText( this, wxID_ANY, wxT("Rows"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText31->Wrap( -1 );
+	bSizer5->Add( m_staticText31, 0, wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+	
+	m_rowsSpinCtrl = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 26, 1 );
+	bSizer5->Add( m_rowsSpinCtrl, 0, wxALL|wxEXPAND, 5 );
+	
+	
+	fgSizer2->Add( bSizer5, 1, wxEXPAND, 5 );
+	
+	m_staticText4 = new wxStaticText( this, wxID_ANY, wxT("Column names."), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText4->Wrap( -1 );
+	fgSizer2->Add( m_staticText4, 0, wxALL, 5 );
+	
+	m_staticText5 = new wxStaticText( this, wxID_ANY, wxT("Row Names"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText5->Wrap( -1 );
+	m_staticText5->Enable( false );
+	
+	fgSizer2->Add( m_staticText5, 0, wxALL, 5 );
+	
+	wxString m_choice2Choices[] = { wxT("A,B,C..."), wxT("1,2,3,..."), wxT("Custom") };
+	int m_choice2NChoices = sizeof( m_choice2Choices ) / sizeof( wxString );
+	m_choice2 = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choice2NChoices, m_choice2Choices, 0 );
+	m_choice2->SetSelection( 0 );
+	fgSizer2->Add( m_choice2, 0, wxALL, 5 );
+	
+	wxString m_choice4Choices[] = { wxT("A,B,C,..."), wxT("1,2,3,..."), wxT("Custom") };
+	int m_choice4NChoices = sizeof( m_choice4Choices ) / sizeof( wxString );
+	m_choice4 = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_choice4NChoices, m_choice4Choices, 0 );
+	m_choice4->SetSelection( 1 );
+	m_choice4->Enable( false );
+	
+	fgSizer2->Add( m_choice4, 0, wxALL, 5 );
+	
+	m_columnNames = new wxEditableListBox(this, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxEL_ALLOW_EDIT |  wxEL_NO_REORDER);
+	m_columnNames->SetMaxSize( wxSize( 150,-1 ) );
+	
+	fgSizer2->Add( m_columnNames, 1, wxALL|wxEXPAND, 5 );
+	
+	m_rowNames = new wxEditableListBox(this, -1, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxEL_ALLOW_EDIT |  wxEL_NO_REORDER);
+	m_rowNames->Enable( false );
+	m_rowNames->SetMaxSize( wxSize( 150,-1 ) );
+	
+	fgSizer2->Add( m_rowNames, 1, wxALL|wxEXPAND, 5 );
+	
+	
+	bSizer2->Add( fgSizer2, 0, wxEXPAND, 5 );
+	
+	wxGridSizer* gSizer1;
+	gSizer1 = new wxGridSizer( 3, 2, 0, 0 );
 	
 	m_staticText3 = new wxStaticText( this, wxID_ANY, wxT("Save Format"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText3->Wrap( -1 );
@@ -93,6 +149,7 @@ MainFrameBase::MainFrameBase( wxWindow* parent, wxWindowID id, const wxString& t
 	
 	this->SetSizer( bSizer1 );
 	this->Layout();
+	bSizer1->Fit( this );
 	
 	// Connect Events
 	this->Connect( m_openFile->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MainFrameBase::OnOpenFile ) );
@@ -101,8 +158,8 @@ MainFrameBase::MainFrameBase( wxWindow* parent, wxWindowID id, const wxString& t
 	m_saveAndNextButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrameBase::OnSaveAndNext ), NULL, this );
 	m_skipAndNextButton->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrameBase::OnSkipAndNext ), NULL, this );
 	m_prevImage->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrameBase::OnPrevious ), NULL, this );
-	m_rowsSpinCtrl->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( MainFrameBase::OnRows ), NULL, this );
 	m_columnsSpinCtrl->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( MainFrameBase::OnColumns ), NULL, this );
+	m_rowsSpinCtrl->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( MainFrameBase::OnRows ), NULL, this );
 	m_saveFormatChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( MainFrameBase::OnFileType ), NULL, this );
 	m_canvas->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( MainFrameBase::OnLeftDown ), NULL, this );
 	m_canvas->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( MainFrameBase::OnLeftUp ), NULL, this );
@@ -118,8 +175,8 @@ MainFrameBase::~MainFrameBase()
 	m_saveAndNextButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrameBase::OnSaveAndNext ), NULL, this );
 	m_skipAndNextButton->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrameBase::OnSkipAndNext ), NULL, this );
 	m_prevImage->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( MainFrameBase::OnPrevious ), NULL, this );
-	m_rowsSpinCtrl->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( MainFrameBase::OnRows ), NULL, this );
 	m_columnsSpinCtrl->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( MainFrameBase::OnColumns ), NULL, this );
+	m_rowsSpinCtrl->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( MainFrameBase::OnRows ), NULL, this );
 	m_saveFormatChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( MainFrameBase::OnFileType ), NULL, this );
 	m_canvas->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( MainFrameBase::OnLeftDown ), NULL, this );
 	m_canvas->Disconnect( wxEVT_LEFT_UP, wxMouseEventHandler( MainFrameBase::OnLeftUp ), NULL, this );
