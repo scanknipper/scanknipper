@@ -44,6 +44,12 @@ void Canvas::Draw(wxDC *onto)
 void Canvas::OnSize(wxSizeEvent &WXUNUSED(event))
 {
 	wxSize s = GetClientSize();
+
+	if (s.x <= 0 || s.y <= 0)
+	{
+		return;
+	}
+
 	m_backBuffer.Create(s.x, s.y);
 	Render(true);
 	Draw(NULL);
